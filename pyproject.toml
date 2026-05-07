@@ -1,0 +1,25 @@
+[project]
+name = "sumo-visualization"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "altair<5",
+    "dagster>=1.10.0",
+    "dagster-dbt>=0.26.0",
+    "dagster-dlt>=0.26.0",
+    "dbt-duckdb>=1.9.0",
+    "dlt[motherduck]>=1.0.0",
+    "duckdb>=1.4.4",
+    "folium>=0.20.0",
+    "geopandas>=1.1.2",
+    "jupyter>=1.1.1",
+    "lab>=8.8",
+    "pandas>=3.0.0",
+    "plotly>=6.5.2",
+    "seaborn>=0.13.2",
+    "standard-imghdr>=3.13.0",
+    "streamlit>=1.19.0",
+    "streamlit-folium>=0.26.1",
+]

@@ -1,0 +1,79 @@
+[0m13:54:09.926922 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10d00eba0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e5579d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e557b10>]}
+
+
+============================== 13:54:09.941894 | e4f72f50-1c47-4199-addf-73f6578e2a50 ==============================
+[0m13:54:09.941894 [info ] [MainThread]: Running with dbt=1.11.8
+[0m13:54:09.942125 [debug] [MainThread]: running dbt with arguments {'profiles_dir': 'dbt_project', 'send_anonymous_usage_stats': 'True', 'indirect_selection': 'eager', 'quiet': 'False', 'cache_selected_only': 'False', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'introspect': 'True', 'use_experimental_parser': 'False', 'printer_width': '80', 'no_print': 'None', 'warn_error': 'None', 'write_json': 'True', 'log_path': 'dbt_project/logs', 'use_colors': 'True', 'fail_fast': 'False', 'target_path': 'None', 'debug': 'False', 'log_format': 'default', 'empty': 'None', 'invocation_command': 'dbt parse --project-dir dbt_project --profiles-dir dbt_project', 'version_check': 'True', 'log_cache_events': 'False', 'partial_parse': 'True'}
+[0m13:54:10.050617 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'e4f72f50-1c47-4199-addf-73f6578e2a50', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10d8682b0>]}
+[0m13:54:10.073859 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'e4f72f50-1c47-4199-addf-73f6578e2a50', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e363ac0>]}
+[0m13:54:10.074702 [info ] [MainThread]: Registered adapter: duckdb=1.10.1
+[0m13:54:10.110907 [debug] [MainThread]: checksum: 7d524ac048c2100769df89d592e662e060a73ca564e31bd9c2a37efdfe8d8ab6, vars: {}, profile: , target: , version: 1.11.8
+[0m13:54:10.111381 [info ] [MainThread]: Unable to do partial parsing because saved manifest not found. Starting full parse.
+[0m13:54:10.111520 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': 'e4f72f50-1c47-4199-addf-73f6578e2a50', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e689850>]}
+[0m13:54:10.544487 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'e4f72f50-1c47-4199-addf-73f6578e2a50', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e8fe5d0>]}
+[0m13:54:10.545811 [info ] [MainThread]: Performance info: dbt_project/target/perf_info.json
+[0m13:54:10.568666 [debug] [MainThread]: Wrote artifact WritableManifest to dbt_project/target/manifest.json
+[0m13:54:10.570408 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt_project/target/semantic_manifest.json
+[0m13:54:10.570650 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": true, "command_wall_clock_time": 0.6793503, "process_in_blocks": "0", "process_kernel_time": 0.14108, "process_mem_max_rss": "179355648", "process_out_blocks": "0", "process_user_time": 1.297646}
+[0m13:54:10.570795 [debug] [MainThread]: Command `dbt parse` succeeded at 13:54:10.570763 after 0.68 seconds
+[0m13:54:10.570913 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10eab0590>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10eab0050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10e8c93d0>]}
+[0m13:54:10.571025 [debug] [MainThread]: Flushing usage events
+[0m13:54:10.863427 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m14:09:35.616241 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x108caeba0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a1ff9d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a1ffb10>]}
+
+
+============================== 14:09:35.618619 | 225b1676-0b8a-4023-b5aa-cfd58364cd98 ==============================
+[0m14:09:35.618619 [info ] [MainThread]: Running with dbt=1.11.8
+[0m14:09:35.618840 [debug] [MainThread]: running dbt with arguments {'log_cache_events': 'False', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'fail_fast': 'False', 'profiles_dir': 'dbt_project', 'use_experimental_parser': 'False', 'invocation_command': 'dbt parse --project-dir dbt_project --profiles-dir dbt_project', 'no_print': 'None', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'quiet': 'False', 'version_check': 'True', 'introspect': 'True', 'target_path': 'None', 'use_colors': 'True', 'warn_error': 'None', 'log_format': 'default', 'write_json': 'True', 'empty': 'None', 'log_path': 'dbt_project/logs', 'printer_width': '80', 'debug': 'False', 'static_parser': 'True'}
+[0m14:09:35.783516 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '225b1676-0b8a-4023-b5aa-cfd58364cd98', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1095082b0>]}
+[0m14:09:35.806614 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '225b1676-0b8a-4023-b5aa-cfd58364cd98', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x109ffbac0>]}
+[0m14:09:35.807907 [info ] [MainThread]: Registered adapter: duckdb=1.10.1
+[0m14:09:35.845917 [debug] [MainThread]: checksum: 7d524ac048c2100769df89d592e662e060a73ca564e31bd9c2a37efdfe8d8ab6, vars: {}, profile: , target: , version: 1.11.8
+[0m14:09:35.900875 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 2 files changed.
+[0m14:09:35.901129 [debug] [MainThread]: Partial parsing: updated file: sumo_visualization_dbt://models/staging/edges.sql
+[0m14:09:35.901263 [debug] [MainThread]: Partial parsing: updated file: sumo_visualization_dbt://models/staging/trips.sql
+[0m14:09:35.998250 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '225b1676-0b8a-4023-b5aa-cfd58364cd98', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a2ed650>]}
+[0m14:09:35.999490 [info ] [MainThread]: Performance info: dbt_project/target/perf_info.json
+[0m14:09:36.022876 [debug] [MainThread]: Wrote artifact WritableManifest to dbt_project/target/manifest.json
+[0m14:09:36.024053 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt_project/target/semantic_manifest.json
+[0m14:09:36.024345 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": true, "command_wall_clock_time": 0.44742367, "process_in_blocks": "0", "process_kernel_time": 0.166327, "process_mem_max_rss": "162070528", "process_out_blocks": "0", "process_user_time": 1.021991}
+[0m14:09:36.024504 [debug] [MainThread]: Command `dbt parse` succeeded at 14:09:36.024468 after 0.45 seconds
+[0m14:09:36.024630 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a7376b0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a737890>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a1d7e70>]}
+[0m14:09:36.024742 [debug] [MainThread]: Flushing usage events
+[0m14:09:36.318277 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m14:28:35.104500 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b192ba0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c6e39d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c6e3b10>]}
+
+
+============================== 14:28:35.106756 | 76cd67df-133a-4908-bef0-48b00a392d90 ==============================
+[0m14:28:35.106756 [info ] [MainThread]: Running with dbt=1.11.8
+[0m14:28:35.106977 [debug] [MainThread]: running dbt with arguments {'quiet': 'False', 'write_json': 'True', 'log_path': 'dbt_project/logs', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'cache_selected_only': 'False', 'version_check': 'True', 'invocation_command': 'dbt parse --project-dir dbt_project --profiles-dir dbt_project', 'log_format': 'default', 'use_experimental_parser': 'False', 'send_anonymous_usage_stats': 'True', 'profiles_dir': 'dbt_project', 'partial_parse': 'True', 'warn_error': 'None', 'use_colors': 'True', 'static_parser': 'True', 'printer_width': '80', 'no_print': 'None', 'fail_fast': 'False', 'indirect_selection': 'eager', 'empty': 'None', 'log_cache_events': 'False', 'debug': 'False', 'introspect': 'True'}
+[0m14:28:35.271136 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '76cd67df-133a-4908-bef0-48b00a392d90', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10b9ec2b0>]}
+[0m14:28:35.293892 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '76cd67df-133a-4908-bef0-48b00a392d90', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c4e3ac0>]}
+[0m14:28:35.295158 [info ] [MainThread]: Registered adapter: duckdb=1.10.1
+[0m14:28:35.330865 [debug] [MainThread]: checksum: 7d524ac048c2100769df89d592e662e060a73ca564e31bd9c2a37efdfe8d8ab6, vars: {}, profile: , target: , version: 1.11.8
+[0m14:28:35.357189 [info ] [MainThread]: Unable to do partial parsing because profile has changed
+[0m14:28:35.357360 [info ] [MainThread]: Unable to do partial parsing because a project config has changed
+[0m14:28:35.357483 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'partial_parser', 'label': '76cd67df-133a-4908-bef0-48b00a392d90', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c7d4a50>]}
+[0m14:28:35.790172 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '76cd67df-133a-4908-bef0-48b00a392d90', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10cc0c410>]}
+[0m14:28:35.791413 [info ] [MainThread]: Performance info: dbt_project/target/perf_info.json
+[0m14:28:35.813128 [debug] [MainThread]: Wrote artifact WritableManifest to dbt_project/target/manifest.json
+[0m14:28:35.814171 [debug] [MainThread]: Wrote artifact SemanticManifest to dbt_project/target/semantic_manifest.json
+[0m14:28:35.814567 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": true, "command_wall_clock_time": 0.7458599, "process_in_blocks": "0", "process_kernel_time": 0.169386, "process_mem_max_rss": "163250176", "process_out_blocks": "0", "process_user_time": 1.29387}
+[0m14:28:35.814793 [debug] [MainThread]: Command `dbt parse` succeeded at 14:28:35.814747 after 0.75 seconds
+[0m14:28:35.815031 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10c6bbe70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10ca84670>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10cc824e0>]}
+[0m14:28:35.815209 [debug] [MainThread]: Flushing usage events
+[0m14:28:36.170878 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m14:38:58.864751 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10db32ba0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f0779d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f077b10>]}
+
+
+============================== 14:38:58.867035 | e6ae9216-78b6-4ead-88db-eb51efc3c71f ==============================
+[0m14:38:58.867035 [info ] [MainThread]: Running with dbt=1.11.8
+[0m14:38:58.867256 [debug] [MainThread]: running dbt with arguments {'cache_selected_only': 'False', 'introspect': 'True', 'static_parser': 'True', 'invocation_command': 'dbt parse --project-dir dbt_project --profiles-dir dbt_project', 'indirect_selection': 'eager', 'partial_parse': 'True', 'no_print': 'None', 'write_json': 'True', 'warn_error': 'None', 'printer_width': '80', 'empty': 'None', 'use_experimental_parser': 'False', 'use_colors': 'True', 'quiet': 'False', 'debug': 'False', 'version_check': 'True', 'target_path': 'None', 'send_anonymous_usage_stats': 'True', 'log_path': 'dbt_project/logs', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'profiles_dir': 'dbt_project', 'log_format': 'default', 'fail_fast': 'False', 'log_cache_events': 'False'}
+[0m14:38:58.870109 [error] [MainThread]: Encountered an error:
+Parsing Error
+  Env var required but not provided: 'MOTHERDUCK_TOKEN'
+[0m14:38:58.870356 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": false, "command_wall_clock_time": 0.041950125, "process_in_blocks": "0", "process_kernel_time": 0.108902, "process_mem_max_rss": "129155072", "process_out_blocks": "0", "process_user_time": 0.741588}
+[0m14:38:58.870522 [debug] [MainThread]: Command `dbt parse` failed at 14:38:58.870490 after 0.04 seconds
+[0m14:38:58.870632 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f0beb10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10ef5f410>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10f0a2470>]}
+[0m14:38:58.870740 [debug] [MainThread]: Flushing usage events
+[0m14:38:59.133850 [debug] [MainThread]: An error was encountered while trying to flush usage events

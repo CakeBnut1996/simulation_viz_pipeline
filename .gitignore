@@ -1,0 +1,20 @@
+config.yaml
+.dlt/secrets.toml
+.env
+
+# ---------------------
+# Streamlit
+# ---------------------
+# Local secrets (DO NOT COMMIT!)
+.streamlit/secrets.toml
+
+# Cache
+.streamlit/cache/
+.streamlit/config.toml
+notes/
+
+# ---------------------
+# IDE / Editor
+# ---------------------
+.idea/
+.db

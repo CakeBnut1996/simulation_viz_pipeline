@@ -1,0 +1,10 @@
+sumo_visualization:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "md:sumo_visualization"
+      schema: bronze_sim
+      threads: 4
+      settings:
+        motherduck_token: "{{ env_var('MOTHERDUCK_TOKEN') }}"

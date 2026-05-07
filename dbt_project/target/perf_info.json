@@ -1,0 +1,51 @@
+{
+    "path_count": 136,
+    "parsed_path_count": 136,
+    "static_analysis_path_count": 4,
+    "static_analysis_parsed_path_count": 4,
+    "is_partial_parse_enabled": true,
+    "is_static_analysis_enabled": true,
+    "read_files_elapsed": 0.030238542007282376,
+    "load_macros_elapsed": 0.23288349999347702,
+    "parse_project_elapsed": 0.13206129102036357,
+    "patch_sources_elapsed": 0.007086666999384761,
+    "process_manifest_elapsed": 0.008653375029098243,
+    "load_all_elapsed": 0.4627338339923881,
+    "projects": [
+        {
+            "project_name": "sumo_visualization_dbt",
+            "elapsed": 0.129833500017412,
+            "parsers": [
+                {
+                    "parser": "model",
+                    "elapsed": 0.0774093329673633,
+                    "parsed_path_count": 4
+                },
+                {
+                    "parser": "test",
+                    "elapsed": 0.05121220799628645,
+                    "parsed_path_count": 1
+                }
+            ],
+            "parsed_path_count": 5
+        },
+        {
+            "project_name": "dbt_duckdb",
+            "elapsed": 0.0008824569522403181,
+            "parsers": [],
+            "parsed_path_count": 0
+        },
+        {
+            "project_name": "dbt",
+            "elapsed": 0.001199917052872479,
+            "parsers": [
+                {
+                    "parser": "doc",
+                    "elapsed": 8.491601329296827e-05,
+                    "parsed_path_count": 1
+                }
+            ],
+            "parsed_path_count": 1
+        }
+    ]
+}

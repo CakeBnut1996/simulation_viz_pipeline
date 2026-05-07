@@ -1,0 +1,18 @@
+name: sumo_visualization_dbt # the dbt project name (logical package name).
+version: 1.0.0
+config-version: 2
+
+profile: sumo_visualization
+
+model-paths: ["models"]
+
+
+models:
+  sumo_visualization_dbt:
+    +materialized: view
+    staging:
+      +schema: staging
+      +materialized: view # Always reflects latest upstream data.
+    marts:
+      +schema: main
+      +materialized: table # Compute happens during dbt run (or refresh) and won’t change until next dbt run.
