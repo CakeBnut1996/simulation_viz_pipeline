@@ -2,7 +2,7 @@
 
 This project is a lightweight data pipeline for transportation modeling outputs.
 
-Goal: after a transportation modeler runs a simulation (currently SUMO), the pipeline ingests its XML outputs into cloud database (MotherDuck), transforms them with dbt, and use Streamlit for visualization.
+Goal: after a transportation modeler runs Simulation of Urban MObility (SUMO), the pipeline ingests its XML outputs into cloud database (MotherDuck), transforms them with dbt, and use Streamlit for visualization.
 
 ## What It Does
 
