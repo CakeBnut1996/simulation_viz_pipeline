@@ -1,32 +1,23 @@
-# Dagster orchestration
+# Dagster Orchestration
 
-This package orchestrates:
-1. dlt bronze ingestion from XML files configured in `pipelines/source_file.yml`
-2. dbt model build in `dbt_project`
+This package orchestrates two steps:
+- Load SUMO XML outputs into MotherDuck via dlt (`dlt_bronze_load`)
+- Run dbt transformations (`sumo_dbt_assets`)
 
-## Run Dagster UI
+## Run locally
 
 ```bash
 dagster dev -m dagster_orchestration
 ```
 
-Then materialize `dlt_bronze_load` and `dbt_build`, or launch `sumo_pipeline_job`.
+Then launch `sumo_pipeline_job` (or materialize assets from the UI).
 
-## Required run config for dlt asset
+## Sensor behavior
 
-`dlt_bronze_load` requires a `job_id` in run config:
+`xml_settle_sensor` (in `definitions.py`) monitors the XML files listed in `source_file.yml` (`output_files`).
 
-```yaml
-ops:
-  dlt_bronze_load:
-    config:
-      job_id: baseline_20260505
-      description: "Baseline run"
-      destination: motherduck
-      write_disposition: append
-```
-
-## Environment
-
-- Make sure `MOTHERDUCK_TOKEN` is set for dbt (`dbt_project/profiles.yml` uses `env_var('MOTHERDUCK_TOKEN')`).
-- Make sure `.dlt/secrets.toml` has `destination.motherduck.credentials` token/password for dlt.
+High-level behavior:
+- Checks file changes every 30 seconds
+- Waits until files are stable (no recent modification)
+- Triggers one run per unique settled file snapshot
+- Skips reruns for the same snapshot using cursor state

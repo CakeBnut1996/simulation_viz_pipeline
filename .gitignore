@@ -1,20 +1,50 @@
-config.yaml
-.dlt/secrets.toml
+# ---------------------
+# Environments & Secrets (CRITICAL)
+# ---------------------
 .env
+.venv/
+env/
+venv/
+.dlt/secrets.toml
+.dlt/config.toml
+*.token
 
 # ---------------------
-# Streamlit
+# SUMO & Simulation Data
 # ---------------------
-# Local secrets (DO NOT COMMIT!)
-.streamlit/secrets.toml
-
-# Cache
-.streamlit/cache/
-.streamlit/config.toml
-notes/
+# Ignore all simulation outputs to keep repo size small
+outputs/
+*.xml
+*.pb
+*.out.xml
+*.net.xml
+*.rou.xml
+*.add.xml
 
 # ---------------------
-# IDE / Editor
+# dbt (Data Build Tool)
+# ---------------------
+target/
+dbt_packages/
+logs/
+
+# ---------------------
+# Python / System
+# ---------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
+Thumbs.db
+.ipynb_checkpoints/
+
+# Dagster temporary local home
+.tmp_dagster_home*/
+
+# ---------------------
+# IDE / Editors
 # ---------------------
 .idea/
-.db
+.vscode/
+*.swp
+*.bak

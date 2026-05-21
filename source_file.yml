@@ -1,0 +1,19 @@
+# Display Parameters
+gis_layer: "baseline"
+
+# Dagster Parameters: Directory for the Dagster Sensor to monitor
+sumo_xml_watch_dir: "/Users/mmh/Library/CloudStorage/OneDrive-OakRidgeNationalLaboratory/nashville_microsim/Model/SUMO/xml/model test/"
+
+# ELT Parameters: Simulation Output Files (List format is better for scaling)
+database_name: "motherduck"
+sim_job_id: "20260508"
+write_disposition: "replace"
+dlt_pipeline_name: "sumo_bronze_pipeline"
+bronze_dataset_name: "bronze"        # This is the Schema
+motherduck_db: "sumo_visualization" # This is the Database
+
+output_files:
+  - "/Users/mmh/Library/CloudStorage/OneDrive-OakRidgeNationalLaboratory/nashville_microsim/Model/SUMO/xml/model test/e2_output.xml"
+  - "/Users/mmh/Library/CloudStorage/OneDrive-OakRidgeNationalLaboratory/nashville_microsim/Model/SUMO/xml/model test/tripinfo.xml"
+simulation_shp_files:
+  baseline: "/Users/mmh/Library/CloudStorage/OneDrive-OakRidgeNationalLaboratory/nashville_microsim/Model/SUMO/shp/links_sumo_wcc.parquet"

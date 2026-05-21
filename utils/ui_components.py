@@ -8,54 +8,58 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
+EDGE_METRICS = {
+    "meanSpeed": "Avg Speed (mph)",
+    "maxJamLengthInMiles": "Queue Length (miles)",
+    "meanOccupancy": "Lane Occupancy (%)",
+}
+
+VEHICLE_METRICS = {
+    "duration": "Trip Duration (minutes)",
+    "routeLength": "Trip Distance (miles)",
+    "waitingTime": "Total Waiting (minutes)",
+}
+
+def get_metric_label(metric_name: str) -> str:
+    """Get human-readable label for a metric name."""
+    return EDGE_METRICS.get(metric_name, VEHICLE_METRICS.get(metric_name, metric_name))
+
 # --- UI COMPONENTS ---
-def sidebar_job_selector(con):
+def sidebar_job_selector(jobs: pd.DataFrame) -> str | None:
     st.sidebar.subheader("📁 Simulation Data")
-    jobs = con.execute("SELECT job_id, scenario FROM sim_jobs").df()
-    if not jobs.empty:
-        jobs['label'] = jobs['job_id'] + " (" + jobs['scenario'] + ")"
-        selected_label = st.sidebar.selectbox("Select Sim Job", jobs['label'])
-        return selected_label.split(" ")[0]
-    return None
+    if jobs.empty:
+        st.sidebar.warning("No simulation jobs available in MotherDuck.")
+        return None
+
+    return st.sidebar.selectbox("Select Sim Job", jobs["sim_job_id"].tolist())
 
 
 def sidebar_edge_metric_selector():
     st.sidebar.subheader("Traffic Metrics")
-    metrics = {
-        "meanSpeed": "Avg Speed (mph)",
-        "maxJamLengthInMeters": "Queue Length (miles)",
-        "meanOccupancy": "Lane Occupancy (%)",
-
-    }
-    label = st.sidebar.selectbox("Attribute", list(metrics.values()))
-    return [k for k, v in metrics.items() if v == label][0]
+    label = st.sidebar.selectbox("Attribute", list(EDGE_METRICS.values()))
+    return [k for k, v in EDGE_METRICS.items() if v == label][0]
 
 def sidebar_vehicle_metric_selector():
     st.sidebar.subheader("Vehicle Metrics (TripInfo)")
-    v_metrics = {
-        "duration": "Trip Duration (minutes)",
-        'routeLength': "Trip Distance (miles)",
-        "waitingTime": "Total Waiting (minutes)"
-    }
-    label = st.sidebar.selectbox("Vehicle Attribute", list(v_metrics.values()))
-    return [k for k, v in v_metrics.items() if v == label][0]
+    label = st.sidebar.selectbox("Vehicle Attribute", list(VEHICLE_METRICS.values()))
+    return [k for k, v in VEHICLE_METRICS.items() if v == label][0]
 
 def sidebar_time_selector():
     st.sidebar.subheader("🕒 Temporal Control")
 
-    # 24 hours * 4 quarters per hour = 96 total steps
+    # 0 to 24 hours display
     time_step = st.sidebar.slider(
         "Time of Day",
-        min_value=0,
-        max_value=95,
-        value=32,  # Defaults to 8:00 AM (8 * 4)
-        step=1,
-        format=""  # We will use the label below for better readability
+        min_value=0.0,
+        max_value=24.0,
+        value=8.0,  # Defaults to 8:00 AM
+        step=0.25,
+        format="%.2f"
     )
 
     # Calculate hours and minutes for display
-    h = time_step // 4
-    m = (time_step % 4) * 15
+    h = int(time_step)
+    m = int((time_step - h) * 60)
     st.sidebar.caption(f"Selected Time: **{h:02d}:{m:02d}**")
 
     return time_step
@@ -63,20 +67,13 @@ def sidebar_time_selector():
 
 def sidebar_style_customization():
     st.sidebar.subheader("🎨 Map Style")
-    style_dict = {
-        "Light": "mapbox://styles/mapbox/light-v9",
-        "Dark": "mapbox://styles/mapbox/dark-v9",
-        "Satellite": "mapbox://styles/mapbox/satellite-v9",
-        "Road": "mapbox://styles/mapbox/streets-v11"
-    }
-    style = st.sidebar.selectbox("Basemap", list(style_dict.keys()))
     line_weight = st.sidebar.slider("Line Thickness", 1, 10, 3)
-    return style_dict[style], line_weight
+    return line_weight
 
 
 # --- RENDERING ---
 
-def show_map(df, metric_name, map_style, line_weight):
+def show_map(df, metric_name):
     if df.empty:
         st.warning("No data available for the selected filters.")
         return
@@ -88,13 +85,17 @@ def show_map(df, metric_name, map_style, line_weight):
     max_val = df['value'].max() if df['value'].max() > 0 else 1
 
     for _, row in df.iterrows():
+        # Skip rendering for zero values in speed to clear map clutter
+        if metric_name == "meanSpeed" and row['value'] <= 0:
+            continue
+
         # Convert WKT to Folium-friendly (lat, lon) coordinates
         geom = wkt.loads(row['geometry_wkt'])
         coords = [(p[1], p[0]) for p in geom.coords]
 
         # Color Logic
         norm = row['value'] / max_val
-        if metric_name == "meanSpeed":
+        if metric_name == "meanSpeed": # instead of actual speed, the color should represent actual speed / speed limit
             # Speed: Green is fast (High), Red is slow (Low)
             color = f"#{int(255 * (1 - norm)):02x}{int(255 * norm):02x}00"
         else:
@@ -104,7 +105,7 @@ def show_map(df, metric_name, map_style, line_weight):
         folium.PolyLine(
             locations=coords,
             color=color,
-            weight=line_weight,
+            weight=3, # lineweight
             opacity=0.8,
             tooltip=f"Link: {row['edge_id']} | Value: {row['value']:.2f}"
         ).add_to(m)
@@ -117,6 +118,8 @@ def show_histogram(df, metric_name):
         st.warning(f"No data available for {metric_name} in this time window.")
         return
 
+    metric_label = get_metric_label(metric_name)
+
     # 1. Clean and Convert
     column_name = "value"
     # Use .copy() to ensure numeric conversion sticks for Plotly
@@ -126,7 +129,7 @@ def show_histogram(df, metric_name):
     avg_val = plot_df[column_name].mean()
     std_val = plot_df[column_name].std()
     total_veh = len(plot_df)
-    st.info(f"**{metric_name} Stats** | Mean: `{avg_val:.2f}` | Std Dev: `{std_val:.2f}` | Vehicles: `{total_veh:,}`")
+    st.info(f"**{metric_label} Stats** | Mean: `{avg_val:.2f}` | Std Dev: `{std_val:.2f}` | Vehicles: `{total_veh:,}`")
 
     # 2. Plot
     fig = px.histogram(
@@ -135,12 +138,12 @@ def show_histogram(df, metric_name):
         nbins=50,
         template="plotly_white",
         color_discrete_sequence=['#2ECC71'],  # Green for vehicles
-        title=f"Vehicle Distribution: {column_name}"
+        title=f"Vehicle Distribution: {metric_label}"
     )
 
     fig.update_layout(
         bargap=0.1,
-        xaxis_title=metric_name,
+        xaxis_title=metric_label,
         yaxis_title="Number of Vehicles",
         # These settings force the chart to recalculate the view every time
         xaxis=dict(autorange=True),
@@ -159,7 +162,9 @@ def show_cdf_distribution(df, metric_name):
         st.warning(f"No data available for {metric_name} in this time window.")
         return
 
-        # 1. Clean and Convert
+    metric_label = get_metric_label(metric_name)
+
+    # 1. Clean and Convert
     column_name = "value"
     plot_df = df[[column_name]].copy()
     plot_df[column_name] = pd.to_numeric(plot_df[column_name], errors='coerce')
@@ -170,7 +175,7 @@ def show_cdf_distribution(df, metric_name):
     p85 = plot_df[column_name].quantile(0.85)
     n_count = len(plot_df)
 
-    st.info(f"**{metric_name}** | Mean: `{avg_val:.2f}` | 85th %-tile: `{p85:.2f}` | N: `{n_count:,}`")
+    st.info(f"**{metric_label}** | Mean: `{avg_val:.2f}` | 85th %-tile: `{p85:.2f}` | N: `{n_count:,}`")
 
     # 2. Create the Figure (Matplotlib)
     fig, ax = plt.subplots(figsize=(10, 5))
@@ -182,8 +187,8 @@ def show_cdf_distribution(df, metric_name):
     ax.axvline(p85, color='#E74C3C', linestyle='--', linewidth=2, label=f'85th % ({p85:.1f}s)')
 
     # Formatting
-    ax.set_title(f"Cumulative Distribution: {metric_name}", fontsize=14)
-    ax.set_xlabel(f"{metric_name} (Seconds)", fontsize=12)
+    ax.set_title(f"Cumulative Distribution: {metric_label}", fontsize=14)
+    ax.set_xlabel(f"{metric_label}", fontsize=12)
     ax.set_ylabel("Cumulative Probability", fontsize=12)
     ax.grid(True, linestyle=':', alpha=0.6)
     ax.legend()

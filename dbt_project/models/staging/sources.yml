@@ -1,10 +1,8 @@
 version: 2
 
 sources:
-  - name: bronze_sim
-    schema: bronze_sim
+  - name: bronze
+    schema: bronze
     tables:
       - name: bronze_e2
       - name: bronze_tripinfo
-      - name: bronze_load_audit
-      - name: bronze_job_metadata

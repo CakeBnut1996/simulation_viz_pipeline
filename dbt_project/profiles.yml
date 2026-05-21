@@ -1,10 +1,9 @@
-sumo_visualization:
+sumo:
   target: dev
   outputs:
     dev:
       type: duckdb
-      path: "md:sumo_visualization"
-      schema: bronze_sim
+      path: "{{ env_var('MOTHERDUCK_PATH', 'md:sumo_visualization') }}" # Parent MotherDuck database; schemas bronze/staging/analytics live under it
+      motherduck_token: "{{ env_var('MOTHERDUCK_TOKEN') }}"
+      schema: bronze # This is the default schema dbt will look in. Resulting Schema Name in MotherDuck will be "sumo.bronze"
       threads: 4
-      settings:
-        motherduck_token: "{{ env_var('MOTHERDUCK_TOKEN') }}"
